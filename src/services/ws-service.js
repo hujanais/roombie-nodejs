@@ -40,6 +40,7 @@ class WSService {
 
         // handle new messages from the ESP and relay the data to all connected clients.
         this.espWSS.on('message', (msg) => {
+          console.log(msg);
           this.wssClients.forEach((ws) => {
             ws.send(`${msg}`);
           });
@@ -47,13 +48,11 @@ class WSService {
 
         // The ESP sends a ping and the server returns a pong to satisfy heartbeat on the ESP side.
         this.espWSS.on('ping', () => {
-          console.log('ping');
           this.espWSS.pong(null);
         });
 
         // When pong is received, reset the isAlive flag to true.
         this.espWSS.on('pong', () => {
-          console.log('pong');
           this.espWSS.isAlive = true;
         });
 
@@ -90,7 +89,7 @@ class WSService {
    * @param {ICommand} cmd
    */
   sendCommand(cmd) {
-    this.espWSS.send(`${cmd.command}`);
+    this.espWSS.send(JSON.stringify(cmd));
   }
 
   get observable() {

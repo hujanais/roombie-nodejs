@@ -10,13 +10,13 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/off', (req, res) => {
-  const cmd = new ICommand('off');
+  const cmd = new ICommand('OFF');
   service.sendCommand(cmd);
   res.send('off requested');
 });
 
 router.get('/on', (req, res) => {
-  const cmd = new ICommand('on');
+  const cmd = new ICommand('ON');
   service.sendCommand(cmd);
   res.send('on requested');
 });
