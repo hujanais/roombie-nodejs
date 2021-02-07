@@ -31,6 +31,10 @@ class WSService {
             ws.send(`${msg}`);
           });
         });
+
+        this.espWSS.on('ping', () => {
+          this.espWSS.pong(null);
+        });
       } else {
         // when connection arrives, assigned a guid to this client and store this off in a map.
         ws.id = uuidv4.uuid();
