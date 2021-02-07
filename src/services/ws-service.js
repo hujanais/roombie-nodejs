@@ -48,6 +48,9 @@ class WSService {
         this.wssClients.delete(ws.id);
         console.log(`wss.close: ${ws.id}, ${code}. ${message}`);
       });
+
+      console.log(`New Connection: ${ws.id}, ${req.url}, ${req.connection.remoteAddress}`);
+
       ws.send(`Welcome, ${ws.id}`);
     });
   }
