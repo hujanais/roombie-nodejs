@@ -13,7 +13,7 @@ module.exports = class RoombieService {
 
   /**
    * Send command
-   * @param {ICommand} cmd
+   * @param cmd {command: 'do-something'}
    */
   sendCommand(cmd) {
     wss.sendCommand(cmd);

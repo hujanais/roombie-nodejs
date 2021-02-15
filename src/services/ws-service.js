@@ -1,7 +1,6 @@
 const WebSocket = require('ws');
 const uuidv4 = require('uuidv4');
 const { Subject } = require('rxjs');
-const ICommand = require('../models/icommand');
 
 class WSService {
   constructor() {
@@ -40,7 +39,6 @@ class WSService {
 
         // handle new messages from the ESP and relay the data to all connected clients.
         this.espWSS.on('message', (msg) => {
-          console.log(msg);
           this.wssClients.forEach((ws) => {
             ws.send(`${msg}`);
           });
@@ -64,13 +62,6 @@ class WSService {
         // when connection arrives, assigned a guid to this client and store this off in a map.
         ws.id = uuidv4.uuid();
         this.wssClients.set(ws.id, ws);
-
-        // ws.on('message', (msg) => {
-        //   console.log(`${ws.id}: ${msg}`);
-        //   const cmd = new ICommand();
-        //   cmd.command = msg;
-        //   this.subject.next(cmd);
-        // });
       }
 
       ws.on('close', (code, message) => {
@@ -79,8 +70,6 @@ class WSService {
       });
 
       console.log(`New Connection: ${ws.id}, ${req.url}, ${req.connection.remoteAddress}`);
-
-      ws.send(`Welcome, ${ws.id}`);
     });
   }
 
