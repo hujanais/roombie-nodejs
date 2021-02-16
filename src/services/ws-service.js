@@ -17,7 +17,7 @@ class WSService {
    */
   init() {
     console.log('initialize wss');
-    var wsPort = process.env.WSPORT || '8888';
+    var wsPort = process.env.WSPORT || '3000';
     this.wss = new WebSocket.Server({ port: parseInt(wsPort) });
 
     this.wss.on('connection', (ws, req) => {
