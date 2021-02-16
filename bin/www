@@ -8,6 +8,8 @@ var app = require('../app');
 var debug = require('debug')('roombie-nodejs:server');
 var http = require('http');
 
+require('dotenv').config();
+
 var wss = require('../src/services/ws-service');
 
 /**

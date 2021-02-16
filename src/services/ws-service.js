@@ -17,7 +17,8 @@ class WSService {
    */
   init() {
     console.log('initialize wss');
-    this.wss = new WebSocket.Server({ port: 8888 });
+    var wsPort = process.env.WSPORT || '8888';
+    this.wss = new WebSocket.Server({ port: parseInt(wsPort) });
 
     this.wss.on('connection', (ws, req) => {
       const id = req.url.replace('/', '');
@@ -35,7 +36,7 @@ class WSService {
           if (!this.espWSS.isAlive) return this.espWSS.terminate();
           this.espWSS.isAlive = false; // set isAlive flag to false and wait for the pong to reset it.
           this.espWSS.ping();
-        }, 5000);
+        }, 10000);
 
         // handle new messages from the ESP and relay the data to all connected clients.
         this.espWSS.on('message', (msg) => {
