@@ -15,10 +15,9 @@ class WSService {
   /**
    * Initialize the websocket pipe.
    */
-  init() {
+  init(server) {
     console.log('initialize wss');
-    var wsPort = process.env.WSPORT || '3000';
-    this.wss = new WebSocket.Server({ port: parseInt(wsPort) });
+    this.wss = new WebSocket.Server({ server });
 
     this.wss.on('connection', (ws, req) => {
       const id = req.url.replace('/', '');
