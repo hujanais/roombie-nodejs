@@ -36,7 +36,7 @@ class WSService {
           if (!this.espWSS.isAlive) return this.espWSS.terminate();
           this.espWSS.isAlive = false; // set isAlive flag to false and wait for the pong to reset it.
           this.espWSS.ping();
-        }, 10000);
+        }, 60000);
 
         // handle new messages from the ESP and relay the data to all connected clients.
         this.espWSS.on('message', (msg) => {
